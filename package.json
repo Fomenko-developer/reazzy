@@ -1,6 +1,6 @@
 {
     "name": "reazzy",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Minimal reactive UI framework for fun",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
