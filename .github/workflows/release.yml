@@ -5,6 +5,8 @@ on:
         branches:
             - main
 
+permissions:
+    contents: write
 jobs:
     release:
         runs-on: ubuntu-latest
@@ -28,7 +30,7 @@ jobs:
                   git config user.name "snappy-bot"
                   git config user.email "bot@snappy.dev"
                   npm version patch -m "chore(release): %s [skip ci]"
-                  git push origin main --follow-tags
+                  git push origin main --follow-tags  # 👈 вот эта команда упала
 
             - name: Publish to npm
               run: npm publish
