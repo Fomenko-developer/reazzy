@@ -1,6 +1,6 @@
 {
     "name": "reazzy",
-    "version": "0.0.14",
+    "version": "0.0.2",
     "description": "Minimal reactive UI framework for fun",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -25,6 +25,7 @@
         "start": "npx vite"
     },
     "devDependencies": {
+        "typescript": "^5.8.3",
         "vite": "^6.3.5"
     }
 }
