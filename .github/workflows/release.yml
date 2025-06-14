@@ -34,6 +34,16 @@ jobs:
                   npm version patch -m "chore(release): %s [skip ci]"
                   git push origin main --follow-tags
 
+            # --- Отладочные шаги ---
+            - name: Verify NPM registry
+              run: npm config get registry
+
+            - name: Who am I on NPM?
+              run: npm whoami
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            # ------------------------
+
             - name: Publish to npm
               run: npm publish --access public
               env:
