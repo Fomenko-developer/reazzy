@@ -6,43 +6,63 @@ on:
             - main
 
 permissions:
-    contents: write
+    contents: write # Разрешение для GitHub Actions изменять репозиторий (для npm version и git push)
 
 jobs:
     release:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-latest # Запускаем джоб на виртуальной машине Ubuntu
 
         steps:
-            - uses: actions/checkout@v3
+            - name: Checkout code
+              uses: actions/checkout@v3 # Клонируем репозиторий
 
             - name: Set up Node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v3 # Настраиваем окружение Node.js
               with:
-                  node-version: 18
-                  registry-url: "https://registry.npmjs.org/"
+                  node-version: 18 # Используйте подходящую версию Node.js для вашей библиотеки
+                  registry-url: "https://registry.npmjs.org/" # Указываем адрес реестра NPM
 
             - name: Install dependencies
-              run: npm ci
+              run: npm ci # Устанавливаем зависимости из package-lock.json
 
             - name: Build package
-              run: npm run build
+              run: npm run build # Запускаем скрипт сборки вашей библиотеки (например, tsc)
 
-            - name: Bump version
+            - name: Bump version and push changes
               run: |
-                  git config user.name "snappy-bot"
-                  git config user.email "bot@snappy.dev"
-                  npm version patch -m "chore(release): %s [skip ci]"
-                  git push origin main --follow-tags
+                  git config user.name "github-actions[bot]" # Настраиваем имя пользователя для Git коммита
+                  git config user.email "github-actions[bot]@users.noreply.github.com" # Настраиваем email для Git коммита
+                  npm version patch -m "chore(release): %s [skip ci]" # Увеличиваем версию патча и создаем Git-тег
+                  git push origin main --follow-tags # Отправляем изменения и теги в репозиторий
 
-            - name: Verify NPM registry
-              run: npm config get registry
+            ---
+            # --- Секция для отладки NPM аутентификации ---
+            # Эти шаги помогут вам убедиться, что NPM_TOKEN работает правильно.
+            # Если после выполнения этих шагов и проверки секрета NPM_TOKEN у вас все еще будет ошибка 401,
+            # значит, проблема в самом токене (его невалидности, отсутствии прав или истечении срока действия)
+            # или в имени пакета.
+            ---
 
-            - name: Who am I on NPM?
+            - name: Verify NPM registry configuration
+              run: npm config get registry # Проверяем, на какой реестр NPM настроен
+
+            - name: Attempt NPM Whoami (Authentication Check)
+              # Этот шаг критичен для проверки, работает ли ваш NPM_TOKEN.
+              # Он должен вывести ваше имя пользователя NPM. Если вы видите E401, токен не работает.
               run: npm whoami
               env:
+                  # Очень важно: этот токен должен быть сгенерирован на npmjs.com с правами "Publish"
+                  # и сохранен как секрет в вашем репозитории GitHub под именем NPM_TOKEN.
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+            ---
+            # --- Конец секции отладки ---
+            ---
+
             - name: Publish to npm
+              # Публикуем пакет в NPM.
+              # `--access public` нужен, если ваш пакет является публичным и публикуется впервые.
               run: npm publish --access public
               env:
+                  # NPM_TOKEN из GitHub Secrets используется для аутентификации при публикации.
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
