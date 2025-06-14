@@ -21,7 +21,6 @@
     "scripts": {
         "build": "tsc",
         "prepublishOnly": "npm run build",
-        "publish": "npm publish --access public",
         "start": "npx vite"
     },
     "devDependencies": {
