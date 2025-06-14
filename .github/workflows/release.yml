@@ -33,6 +33,6 @@ jobs:
                   git push origin main --follow-tags  # 👈 вот эта команда упала
 
             - name: Publish to npm
-              run: npm publish
+              run: npm publish --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
