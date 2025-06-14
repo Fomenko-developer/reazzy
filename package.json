@@ -1,5 +1,5 @@
 {
-    "name": "@group-of-people/reazzy",
+    "name": "@developer.fomenko.artjoms/reazzy",
     "version": "0.0.6",
     "description": "Minimal reactive UI framework for fun",
     "main": "dist/index.js",
