@@ -1,5 +1,5 @@
 {
-    "name": "reazzy",
+    "name": "@group-of-people/reazzy",
     "version": "0.0.5",
     "description": "Minimal reactive UI framework for fun",
     "main": "dist/index.js",
@@ -13,6 +13,9 @@
         "reactive",
         "minimal"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "author": "Group of people",
     "license": "MIT",
     "scripts": {

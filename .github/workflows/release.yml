@@ -7,9 +7,11 @@ on:
 
 permissions:
     contents: write
+
 jobs:
     release:
         runs-on: ubuntu-latest
+
         steps:
             - uses: actions/checkout@v3
 
@@ -30,9 +32,9 @@ jobs:
                   git config user.name "snappy-bot"
                   git config user.email "bot@snappy.dev"
                   npm version patch -m "chore(release): %s [skip ci]"
-                  git push origin main --follow-tags  # 👈 вот эта команда упала
+                  git push origin main --follow-tags
 
             - name: Publish to npm
-              run: npm publish --access public --registry=https://registry.npmjs.org/
+              run: npm publish
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
