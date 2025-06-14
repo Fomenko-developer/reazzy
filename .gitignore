@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log*
+.yarn/
+.pnpm-debug.log*
+
+# Build
+dist/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# System
+.DS_Store
+Thumbs.db
+
+# Vite cache
+.cache/
+vite.config.ts.bak

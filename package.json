@@ -1,0 +1,27 @@
+{
+    "name": "reazzy",
+    "version": "0.0.1",
+    "description": "Minimal reactive UI framework for fun",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "keywords": [
+        "ui",
+        "framework",
+        "reactive",
+        "minimal"
+    ],
+    "author": "Group of people",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build",
+        "publish": "npm publish --access public",
+        "start": "npx vite"
+    },
+    "devDependencies": {
+        "vite": "^6.3.5"
+    }
+}

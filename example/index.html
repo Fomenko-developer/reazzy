@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Snappy Demo</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="module">
+            import { mount, reactive } from "../src/index.ts";
+
+            function Counter() {
+                const count = reactive(0);
+
+                const btn = document.createElement("button");
+                btn.textContent = `Count: ${count.value}`;
+
+                btn.onclick = () => {
+                    count.value++;
+                    btn.textContent = `Count: ${count.value}`;
+                };
+
+                return btn;
+            }
+
+            const app = document.getElementById("app");
+            if (app) {
+                mount(Counter, app);
+            }
+        </script>
+    </body>
+</html>
