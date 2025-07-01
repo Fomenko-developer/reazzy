@@ -1,4 +1,4 @@
-import { getRegisteredComponents } from "./registry";
+import { getRegisteredComponents } from "./registry.js";
 
 export function bootstrap() {
     const components = getRegisteredComponents();

@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import TemplateTransform from "./src/framework/vite-template-transform";
+import TemplateTransform from "./src/framework/vite-template-transform.js";
 
 export default defineConfig({
     root: "example",

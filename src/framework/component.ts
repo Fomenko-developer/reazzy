@@ -1,4 +1,4 @@
-import { registerComponent } from "./registry";
+import { registerComponent } from "./registry.js";
 
 export function Component(options: {
     selector: string;
