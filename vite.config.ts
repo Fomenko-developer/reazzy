@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import TemplateTransform from "./src/framework/vite-template-transform";
 
 export default defineConfig({
     root: "example",
@@ -8,4 +9,5 @@ export default defineConfig({
     server: {
         port: 3000,
     },
+    plugins: [TemplateTransform()],
 });
